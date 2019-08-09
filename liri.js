@@ -7,14 +7,16 @@ var axios = require("axios");
 //concert-this
 //movie-this
 //do-what-it-says
-var userCommands = process.argv;
-for (var i = 2; i < userCommands.length; i++) {
-
+var userInputs = process.argv;
+var userCommands = []
+for (var i = 2; i < userInputs.length; i++) {
+    userCommands.push(userInputs[i])
+    console.log(userCommands[i])
 }
 
 axios.get("https://en.wikipedia.org/wiki/Kudos_(granola_bar)").then(
     function (response) {
-        console.log(response.data);
+        //console.log(response.data);
     },
 
     function (error) {
