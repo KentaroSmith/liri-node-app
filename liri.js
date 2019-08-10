@@ -1,8 +1,13 @@
 require("dotenv").config();
+//For reading spotify client and secret
 var keys = require("./keys.js");
+//lets us query different API's
 var axios = require("axios");
+//Formatting for dates and times
 var moment = require("moment");
+//Reading, writing and appending files
 var fs = require("fs");
+//Spotify Node API
 var Spotify= require("node-spotify-api");
 
 var spotify = new Spotify(keys.Spotify);
@@ -11,33 +16,35 @@ var spotify = new Spotify(keys.Spotify);
 //concert-this
 //movie-this
 //do-what-it-says
-var keyTerm = process.argv.slice(2);
-var searchString = toString(keyTerm);
-//var searchString = keyTermstring.replace(',',' ');
+var searchString = process.argv.slice(3).join(' ');
+
 //Bands in town api query function
 var concertSearch = function(artist){
-    console.log("concert")
-        //change to one string instead of just argv3 later
-        var artist = searchString;
     axios
     //bandsintown web api query
     .get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp")
     .then(function(response) {
-        console.log(response.data);
+        console.log("Here is some information about the next few "+artist+" events:");
+        for(var i=0;i<response.data.length;i++){
+            console.log("====================================================");
+            console.log(response.data[i].venue.name);
+            console.log(response.data[i].venue.city+", "+response.data[i].venue.region);
+            console.log(response.data[i].venue.country);
+            var concertDate = moment(response.data[i].venue.datetime).format('MM/DD/YYYY');
+            console.log(concertDate);
+            console.log("====================================================");
+        }
+        
       })
+      //Catching error messages (for debugging purposes)
       .catch(function(error) {
         if (error.response) {
-          // The request was made and the server responded with a status code
-          // that falls out of the range of 2xx
           console.log(error.response.data);
           console.log(error.response.status);
           console.log(error.response.headers);
         } else if (error.request) {
-          // The request was made but no response was received
-          // `error.request` is an object that comes back with details pertaining to the error that occurred.
           console.log(error.request);
         } else {
-          // Something happened in setting up the request that triggered an Error
           console.log("Error", error.message);
         }
         console.log(error.config);
@@ -45,19 +52,28 @@ var concertSearch = function(artist){
     };
 
 var songSearch = function(song){
+    if(!song){
+        song = "The Sign"
+    };
     spotify.search({ type: 'track', query: song }, function(err, result) {
         if (err) {
           return console.log('Error occurred: ' + err);
         }
-       
-      console.log(result.tracks); 
+        for(var i=0;i<result.tracks.items.length;i++){
+            console.log("Here is some information about songs named: "+song);
+            console.log("====================================================");
+            console.log("Song Name: "+result.tracks.items[i].name);
+            console.log("Artist Name: "+result.tracks.items[i].album.artists.name); 
+            console.log("Listen: "+result.tracks.items[i].external_urls.spotify); 
+            console.log("====================================================");
+        }
+      
       });
 };
 
 
 switch(process.argv[2]){
     case ('concert-this'):
-        console.log(searchString)
     concertSearch(searchString);
     break;
     case('spotify-this-song'):
