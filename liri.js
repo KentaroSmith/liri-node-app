@@ -61,18 +61,40 @@ var songSearch = function (song) {
     }
     console.log("Here is some information about songs named: " + song);
     console.log("====================================================");
+    console.log("Full result: "+result.tracks.items[0].album.name)
+
     for (var i = 0; i < result.tracks.items.length; i++) {
       //var log = result.tracks.items;
       //fs.appendFile("log.txt", log)
-
-      console.log("Song Name: " + result.tracks.items[i].name);
-      console.log("Artist Name: " + result.tracks.items[i].album.artists.name);
+           console.log("Song Name: "+result.tracks.items[i].name)
+      console.log("Artist Name: "+result.tracks.items[i].artists[0].name)
+      console.log("Album Name: " + result.tracks.items[i].album.name);
       console.log("Listen: " + result.tracks.items[i].external_urls.spotify);
       console.log("====================================================");
     }
 
   });
 };
+
+var movieSearch= function(title){
+
+axios
+.get("http://www.omdbapi.com/?apikey=trilogy&"+title)
+.then(function(response){
+    console.log("Here is some information about songs named: " + title);
+    console.log("====================================================");
+    //Left Off trying to interpret JSON file
+    console.log(response)
+    console.log("Movie Title: ");
+    console.log("Release Year: ");
+    console.log("IMDB Rating: ");
+    console.log("Rotten Tomatoes Rating: ");
+    console.log("Production Country: ");
+    console.log("Language: ");
+    console.log("Plot: ");
+    console.log("Cast: ");
+})
+}
 
 
 switch (process.argv[2]) {
@@ -84,7 +106,7 @@ switch (process.argv[2]) {
     break;
   //OMDB API
   case ('movie-this'):
-    console.log("Movie")
+    movieSearch(searchString);
     break;
   //Spotify API
   case ('do-what-it-says'):
