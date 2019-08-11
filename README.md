@@ -3,16 +3,16 @@
 This is a Node app that takes in requests and pulls information about music, movies, and concerts from several API's and returns them to the user.
 
 
-### Dependencies used:
-* axios
-* dotenv
-* fs
-* moment
-* node-spotify-api
+### Node Packages:
+* [axios](https://www.npmjs.com/package/axios)
+* [dotenv](https://www.npmjs.com/package/dotenv)
+* [moment](https://www.npmjs.com/package/moment)
+* [node-spotify-api](https://www.npmjs.com/package/node-spotify-api)
 
 ### Web API's used:
-* 
-
+* [Bands in town](https://manager.bandsintown.com/support/bandsintown-api)
+* [Spotify](https://developer.spotify.com/documentation/web-api/)
+* [OMDB](http://www.omdbapi.com/)
 ## How it works:
 
 ### Setup:
