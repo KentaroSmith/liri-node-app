@@ -34,5 +34,8 @@ This is a Node app that takes in requests and pulls information about music, mov
 ![movie-this](pics/movie-this.jpg)
 >do-what-it-says
 - This command will read the random.txt file in the repository and execute the command and search term entered in the file - provided that they are separated by a comma.
+
+
+
 ![randomtxt](pics/randomtxt.jpg)
 ![do-what-it-says](pics/do-what-it-says.jpg)
