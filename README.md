@@ -17,6 +17,11 @@ This is a Node app that takes in requests and pulls information about music, mov
    1. 
 2. Clone this repository
 3. Install the Node Packages 
-   3. Use the command '<npm install>' in bash to ensure that the app has everything it needs to work
+   3. Use the command 'npm install' in bash to ensure that the app has everything it needs to work
 
 ### Product Demo:
+#### LIRI has four commands:
+>concert-this 
+>spotify-this-song
+>movie-this
+>do-what-it-says
